@@ -14,12 +14,39 @@
 </head>
 
     <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
     <!--Add a nav bar here -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Best Cars Nationwide Delearship Locator</a>
+            </div>
+            <!--Add List to NavBar for adding a Link/Button to the About Us Page-->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="btn btn-link" href="{% url 'djangoapp:about' %}">
+                        About Us
+                    </a>
+                </li>
+            </ul>
 
+        </div>
+    </nav>
+    <!-- Remove this line the first time you edit this file -->
+    <!--This is the index page of your Django app!-->
+    
     <!--Add a dealer table here -->
-
     </body>
 
+<!-- Footer for Adding Contact Us Page Link-->
+<footer>
+    <div class="container-fluid">
+        <a class="btn btn-link" href="{% url 'djangoapp:contact' %}">
+            Contact Us
+        </a>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-white" href="https://github.com/HilbertSpecs">HilbertSpecs</a>
+    </div>
+</footer>
 </html>
