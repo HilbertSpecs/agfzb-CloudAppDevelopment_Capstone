@@ -47,7 +47,7 @@ def login_request(request):
             return redirect('djangoapp:index')     #home page redirect
         else:
             # If not, return to login page again
-            messages.error(request,'Invalid User Name or Password')
+            #messages.error(request,'Invalid User Name or Password')
             return render(request, 'djangoapp/index.html', context)
     else:
         return render(request, 'djangoapp/index.html', context)
