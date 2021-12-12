@@ -63,8 +63,8 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
 
     if json_result:
         reviews=json_result["body"]
-        for review in reviews:
-            review_doc= reviews["docs"][0]
+        for review in range(len(reviews)-1):
+            review_doc= reviews["docs"][review]
             review_obj=DealerReview(
                 car_make=review_doc["car_make"],
                 car_model=review_doc["car_model"],
