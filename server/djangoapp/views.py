@@ -117,8 +117,9 @@ def get_dealerships(request):
 # ...
 def get_dealer_details(request,dealer_id):
     if request.method == "GET":
+        parameters={"dealership":dealer_id}
         url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
-        reviews=get_dealer_reviews_id_from_cf(url)
+        reviews=get_dealer_reviews_id_from_cf(url,kwargs=parameters)
         review_cat=' '.join([review.review for review in reviews])
         return HttpResponse(review_cat)
 # Create a `add_review` view to submit a review
