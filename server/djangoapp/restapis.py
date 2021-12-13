@@ -65,25 +65,32 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
         reviews=json_result["body"]["data"]["docs"]
         for review in reviews:
             review_obj=DealerReview(
+                car_make=review["car_make"],
+                car_model=review["car_model"],
+                car_year=review["car_year"],
                 dealership=review["dealership"],
+                id=review["id"],
                 name=review["name"],
                 purchase=review["purchase"],
-                review=review["review"])
+                purchase_date=review["purchase_date"],
+                review=review["review"],
+                sentiment="default"
+                )
 
-            if "id" in review:
-                review_obj.id=review["id"]
-            if "purchase_date" in review:
-                review_obj.purchase_date=review["purchase_date"]
-            if "car_make" in review:
-                review_obj.car_make=review["car_make"]
-            if "car_model" in review:
-                review_obj.car_model=review["car_model"]
-            if "car_year" in review:
-                review_obj.car_year=review["car_year"]
+            #if "id" in review:
+                #review_obj.id=review["id"]
+            #if "purchase_date" in review:
+                #review_obj.purchase_date=review["purchase_date"]
+            #if "car_make" in review:
+                #review_obj.car_make=review["car_make"]
+            #if "car_model" in review:
+                #review_obj.car_model=review["car_model"]
+            #if "car_year" in review:
+                #review_obj.car_year=review["car_year"]
 
-            sentiment="default"
+            #sentiment="default"
             print(sentiment)
-            review_obj.sentiment=sentiment
+            #review_obj.sentiment=sentiment
             results.append(review_obj)
 
     return results
