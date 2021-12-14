@@ -12,8 +12,19 @@ def get_request(url, **kwargs):
     print(kwargs)
     print("GET from {} ".format(url))
     try:
+        if:
+            "api_key" in kwargs:
+            params=dict()
+            params["text"]=kwargs["text"]
+            params["version"]=kwargs["version"]
+            params["features"]=kwargs["features"]
+            params["return_analyzed_text"]=kwargs["return_analyzed_text"]
+
+            response = requests.get(url,params=params,headers={'Content-Type': 'application/json'}, auth=HTTPBasicAuth('apikey',kwargs["api_key"]))
+
+        else:
         # Call get method of requests library with URL and parameters
-        response = requests.get(url, headers={'Content-Type': 'application/json'},
+            response = requests.get(url, headers={'Content-Type': 'application/json'},
                                     params=kwargs)
     except:
         # If any error occurs
@@ -88,9 +99,10 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
             if "car_year" in review:
                 review_obj.car_year=review["car_year"]
 
-            sentiment="default"
-            print(review_obj.sentiment)
-            #review_obj.sentiment=sentiment
+            #sentiment="default"
+            print("Sentiment: ",review_obj.sentiment)
+            review_obj.sentiment=analyze_review_sentiments(review_obj.review)
+            print("Sentiment_(NLU): ", review_obj.sentiment)
             results.append(review_obj)
 
     return results
@@ -100,6 +112,18 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
 # def analyze_review_sentiments(text):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
+def analyze_review_sentiments(dealer_review):
+    api_url="https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/d1d2f758-3a11-4eac-a334-094ea9dd9c51"
 
+    parameters={
+        "api_key":"VvIMhCl_nW1AH_tOUo77nQLPJbEFriLitpyjJqUQlFzd",
+        "text":dealer_review,
+        "version":"2020-08-01",
+        "features":"sentiment",
+        "return_analyzed_text":True
+    }
+    
+    json_result=get_request(api_url,**parameters)
 
+    return json_result
 
