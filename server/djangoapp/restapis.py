@@ -117,7 +117,7 @@ def analyze_review_sentiments(dealer_review):
     parameters={
         "api_key":"VvIMhCl_nW1AH_tOUo77nQLPJbEFriLitpyjJqUQlFzd",
         "text":dealer_review,
-        "version":"2020-08-01",
+        "version":"2021-08-01",
         "features":"sentiment",
         "return_analyzed_text":True
     }
