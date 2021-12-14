@@ -12,8 +12,7 @@ def get_request(url, **kwargs):
     print(kwargs)
     print("GET from {} ".format(url))
     try:
-        if:
-            "api_key" in kwargs:
+        if "api_key" in kwargs:
             params=dict()
             params["text"]=kwargs["text"]
             params["version"]=kwargs["version"]
