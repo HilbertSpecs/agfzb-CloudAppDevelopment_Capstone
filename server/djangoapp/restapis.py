@@ -106,8 +106,12 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
 
             #sentiment="default"
             print("Sentiment: ",review_obj.sentiment)
-            review_obj.sentiment=analyze_review_sentiments(review_obj.review)
-            print("Sentiment_(NLU): ", review_obj.sentiment)
+            #review_obj.sentiment=analyze_review_sentiments(review_obj.review)
+            sentiment=analyze_review_sentiments(review_obj.review)
+            print("Sentiment_(NLU_RAW): ", sentiment)
+            #Extrat Sentiment Label
+            review_obj.sentiment=sentiment["sentiment"]["document"]["label"]
+            print("Sentiment_(NLU_label_extract): ", review_obj.sentiment)
             results.append(review_obj)
 
     return results
@@ -118,7 +122,7 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 def analyze_review_sentiments(dealer_review):
-    api_url="https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/d1d2f758-3a11-4eac-a334-094ea9dd9c51"
+    api_url="https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/d1d2f758-3a11-4eac-a334-094ea9dd9c51/v1/analyze"
 
     parameters={
         "api_key":"VvIMhCl_nW1AH_tOUo77nQLPJbEFriLitpyjJqUQlFzd",
