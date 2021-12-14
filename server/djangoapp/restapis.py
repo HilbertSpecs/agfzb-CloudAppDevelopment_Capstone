@@ -19,9 +19,14 @@ def get_request(url, **kwargs):
             params["features"]=kwargs["features"]
             params["return_analyzed_text"]=kwargs["return_analyzed_text"]
 
+            print("params: ",params)
+
             response = requests.get(url,params=params,headers={'Content-Type': 'application/json'}, auth=HTTPBasicAuth('apikey',kwargs["api_key"]))
 
+            print("Response: ",response)
+
         else:
+            print("No api_key passed to get request.")
         # Call get method of requests library with URL and parameters
             response = requests.get(url, headers={'Content-Type': 'application/json'},
                                     params=kwargs)
