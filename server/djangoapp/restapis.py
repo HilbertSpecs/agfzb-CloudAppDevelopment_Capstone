@@ -21,7 +21,8 @@ def get_request(url, **kwargs):
 
             print("params: ",params)
 
-            response = requests.get(url,params=params,headers={'Content-Type': 'application/json'}, auth=HTTPBasicAuth('apikey',kwargs["api_key"]))
+            response = requests.get(url,params=params,headers={'Content-Type': 'application/json'},
+                auth=HTTPBasicAuth('apikey',kwargs["api_key"]))
 
             print("Response_apikey_Provided: ",response)
 
