@@ -107,12 +107,16 @@ def get_dealer_reviews_id_from_cf(url,**kwargs):
             #sentiment="default"
             print("Sentiment: ",review_obj.sentiment)
             #review_obj.sentiment=analyze_review_sentiments(review_obj.review)
-            sentiment=analyze_review_sentiments(review_obj.review)
-            print("Sentiment_(NLU_RAW): ", sentiment)
-            #Extrat Sentiment Label
-            review_obj.sentiment=sentiment["sentiment"]["document"]["label"]
+            sentiment_response=analyze_review_sentiments(review_obj.review)
+            print("Sentiment_(NLU_RAW): ", sentiment_response)
+            if "sentiment" in sentiment_response:
+                #Extrat Sentiment Label
+                review_obj.sentiment=sentiment_response['sentiment']['document']['label']
+            else:
+                review_obj.sentiment=sentiment_response['error']
             print("Sentiment_(NLU_label_extract): ", review_obj.sentiment)
             results.append(review_obj)
+            #print(results)
 
     return results
 

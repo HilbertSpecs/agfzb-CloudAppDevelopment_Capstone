@@ -120,9 +120,17 @@ def get_dealer_details(request,dealer_id):
         parameters={"dealership":dealer_id}
         url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
         reviews=get_dealer_reviews_id_from_cf(url,kwargs=parameters)
-        review_cat=' '.join([review.review for review in reviews])
+        #review_cat=' '.join([review.review for review in reviews])
         #review_cat2=' '.join([review.sentiment for review in reviews])
-        return HttpResponse(review_cat)
+        temp=[]
+        for review in reviews:
+            message1=review.review
+            message2=review.sentiment
+            message=message1 + " (" + message2 + ") "
+            temp.append(message)
+        reviews_analyzed=" ".join(temp)
+        #return HttpResponse(review_cat)
+        return HttpResponse(reviews_analyzed)
 # Create a `add_review` view to submit a review
 # def add_review(request, dealer_id):
 # ...
