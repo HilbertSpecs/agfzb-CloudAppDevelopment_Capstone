@@ -55,12 +55,19 @@
     <!-- Add reviews as cards -->
     {% for analyzed_review in analyzed_reviews %}
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+        {% if analyzed_review.sentiment == 'positive' %}
+            <img class="card-img-top" src="{{MEDIA_URL}}/emoji/positive.png" alt="Card image cap">
+        {% elif analyzed_review.sentiment == 'neutral' %}
+            <img class="card-img-top" src="{{MEDIA_URL}}/emoji/neutral.png" alt="Card image cap">
+        {% elif analyzed_review.sentiment == 'negative' %}
+            <img class="card-img-top" src="{{MEDIA_URL}}/emoji/negative.png" alt="Card image cap">
+        {% else %}
+        {% endif %}
+            <div class="card-body">
+                <h5 class="card-title"> {{ analyzed_review.sentiment }} </h5>
+                <p class="card-text"> {{ analyzed_review.review }} </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
     </div>
     {% endfor %}
     </body>
