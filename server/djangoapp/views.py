@@ -165,16 +165,16 @@ def add_review(request,dealer_id):
         new_review["review"]="Dreaming of Speed in my Wake."
 
         review_payload={}
-        #review_payload["review"]=new_review
-        review_payload=new_review
+        review_payload["review"]=new_review
+        #review_payload=new_review
         #convert python dictionary to json object
-        review_payload_json=json.dumps(review_payload)
-        print("review_payload_json: ",review_payload_json)
+        #review_payload_json=json.dumps(review_payload)
+        #print("review_payload_json: ",review_payload_json)
 
         review_post_url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
         parameters={"dealership":dealer_id}
         print("parameters: ",parameters)
-        post_response=post_request(review_post_url,review_payload_json,**parameters)
+        post_response=post_request(review_post_url,review_payload,**parameters)
         print(post_response)
         return JsonResponse(post_response)
     else:
