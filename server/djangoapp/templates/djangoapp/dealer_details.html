@@ -64,7 +64,7 @@
         {% else %}
         {% endif %}
             <div class="card-body">
-                <h5 class="card-title"> {{ analyzed_review.sentiment }} </h5>
+                <h5 class="card-title"> {{ analyzed_review.car_make }} {{analyzed_review.car_model}} ({{analyzed_review.car_year}}) </h5>
                 <p class="card-text"> {{ analyzed_review.review }} </p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
