@@ -133,21 +133,30 @@ def get_dealerships(request):
 # def get_dealer_details(request, dealer_id):
 # ...
 def get_dealer_details(request,dealer_id):
+    context={}
     if request.method == "GET":
         parameters={"dealership":dealer_id}
         url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
         reviews=get_dealer_reviews_id_from_cf(url,kwargs=parameters)
         #review_cat=' '.join([review.review for review in reviews])
         #review_cat2=' '.join([review.sentiment for review in reviews])
-        temp=[]
-        for review in reviews:
-            message1=review.review
-            message2=review.sentiment
-            message=message1 + " (" + message2 + ") "
-            temp.append(message)
-        reviews_analyzed=" ".join(temp)
         #return HttpResponse(review_cat)
-        return HttpResponse(reviews_analyzed)
+        analyzed_reviews=[]
+        for review in reviews:
+            individual_review={}
+            individual_review["review"]=review.review
+            individual_review["sentiment"]=review.sentiment
+            analyzed_reviews.append(individual_review)
+        context={"analyzed_reviews":analyzed_reviews}
+        print("context: ",context)
+        return render(request,'djangoapp/dealer_details.html',context)
+        #for review in reviews:
+            #message1=review.review
+            #message2=review.sentiment
+            #message=message1 + " (" + message2 + ") "
+            #temp.append(message)
+        #reviews_analyzed=" ".join(temp)
+        #return HttpResponse(reviews_analyzed)
 # Create a `add_review` view to submit a review
 # def add_review(request, dealer_id):
 # ...
@@ -155,10 +164,10 @@ def add_review(request,dealer_id):
     if request.user.is_authenticated:
         new_review=dict()
         new_review["car_make"]="Ford"
-        new_review["car_model"]="Mustang"
+        new_review["car_model"]="MustangGT"
         new_review["car_year"]=2021
         new_review["dealership"]=dealer_id
-        new_review["id"]=9
+        new_review["id"]=11
         new_review["name"]="Neddy Speddy"
         new_review["purchase"]=True
         new_review["purchase_date"]="12/14/21"
