@@ -53,23 +53,28 @@
         </div>
     </nav>
     <!-- Add reviews as cards -->
-    {% for analyzed_review in analyzed_reviews %}
-    <div class="card" style="width: 18rem;">
-        {% if analyzed_review.sentiment == 'positive' %}
-            <img class="card-img-top" src="{{MEDIA_URL}}/emoji/positive.png" alt="Card image cap">
-        {% elif analyzed_review.sentiment == 'neutral' %}
-            <img class="card-img-top" src="{{MEDIA_URL}}/emoji/neutral.png" alt="Card image cap">
-        {% elif analyzed_review.sentiment == 'negative' %}
-            <img class="card-img-top" src="{{MEDIA_URL}}/emoji/negative.png" alt="Card image cap">
-        {% else %}
-        {% endif %}
-            <div class="card-body">
-                <h5 class="card-title"> {{ analyzed_review.car_make }} {{analyzed_review.car_model}} ({{analyzed_review.car_year}}) </h5>
-                <p class="card-text"> {{ analyzed_review.review }} </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="card-deck">
+        {% for analyzed_review in analyzed_reviews %}
+        <div class="card bg-light mb-3" style="width: 18rem;">
+            <div class="card-header">
+                {% if analyzed_review.sentiment == 'positive' %}
+                    <img class="img-thumbnail" src="{{MEDIA_URL}}/emoji/positive.png" alt="Card image cap" width="80" heigh="80">
+                {% elif analyzed_review.sentiment == 'neutral' %}
+                    <img class="img-thumbnail" src="{{MEDIA_URL}}/emoji/neutral.png" alt="Card image cap" width="80" heigh="80">
+                {% elif analyzed_review.sentiment == 'negative' %}
+                    <img class="img-thumbnail" src="{{MEDIA_URL}}/emoji/negative.png" alt="Card image cap" width="80" heigh="80">
+                {% else %}
+                {% endif %}
+                {{analyzed_review.sentiment}}
             </div>
+                <div class="card-body">
+                    <h5 class="card-title"> {{ analyzed_review.car_make }} {{analyzed_review.car_model}} ({{analyzed_review.car_year}}) </h5>
+                    <p class="card-text"> {{ analyzed_review.review }} </p>
+                    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+                </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     </body>
 
 </html>
