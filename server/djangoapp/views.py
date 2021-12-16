@@ -167,30 +167,51 @@ def get_dealer_details(request,dealer_id):
 # ...
 def add_review(request,dealer_id):
     if request.user.is_authenticated:
-        new_review=dict()
-        new_review["car_make"]="Ford"
-        new_review["car_model"]="MustangGT"
-        new_review["car_year"]=2021
-        new_review["dealership"]=dealer_id
-        new_review["id"]=11
-        new_review["name"]="Neddy Speddy"
-        new_review["purchase"]=True
-        new_review["purchase_date"]="12/14/21"
-        new_review["review"]="Dreaming of Speed in my Wake."
+        #####################################
+        context={}
+        if request.method=='GET':
+            carobjects=CarModel.objects.filter(dealer_id__exact=dealer_id)
+            car_inventory=[]
+            for carobject in carobjects:
+                individual_car={}
+                individual_car["make"]=carobject.make
+                individual_car["dealer_id"]=carobject.dealer_id
+                individual_car["model_name"]=carobject.model_name
+                individual_car["style"]=carobject.style
+                individual_car["year"]=carobject.year
+                car_inventory.append(individual_car)
+            context={"car_inventory":car_inventory}
+            print("context: ",context)
+            return render(request,'djangoapp/add_review.html',context)
+        #####################################
+        elif request.method=='POST':
+            new_review=dict()
+            new_review["car_make"]="Ford"
+            new_review["car_model"]="MustangGT"
+            new_review["car_year"]=2021
+            new_review["dealership"]=dealer_id
+            new_review["id"]=11
+            new_review["name"]="Neddy Speddy"
+            new_review["purchase"]=True
+            new_review["purchase_date"]="12/14/21"
+            new_review["review"]="Dreaming of Speed in my Wake."
 
-        review_payload={}
-        review_payload["review"]=new_review
-        #review_payload=new_review
-        #convert python dictionary to json object
-        #review_payload_json=json.dumps(review_payload)
-        #print("review_payload_json: ",review_payload_json)
+            review_payload={}
+            review_payload["review"]=new_review
+            #review_payload=new_review
+            #convert python dictionary to json object
+            #review_payload_json=json.dumps(review_payload)
+            #print("review_payload_json: ",review_payload_json)
 
-        review_post_url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
-        parameters={"dealership":dealer_id}
-        print("parameters: ",parameters)
-        post_response=post_request(review_post_url,review_payload,**parameters)
-        print(post_response)
-        return JsonResponse(post_response)
+            review_post_url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
+            parameters={"dealership":dealer_id}
+            print("parameters: ",parameters)
+            post_response=post_request(review_post_url,review_payload,**parameters)
+            print(post_response)
+            return JsonResponse(post_response)
+        
+        else:
+            print("Invalid HTTP Method on Add Review")
     else:
         print("Unauthenticated User Please Log in to Submit Review")
 
