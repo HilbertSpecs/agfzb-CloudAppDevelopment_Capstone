@@ -15,20 +15,33 @@
     <form action="{% url 'djangoapp:add_review' dealer_id %}" method ="post">
         <div class="container">
             {% csrf_token %}
-            <h1>Add Review</h1>
+            <h1>Add Review for Dealership Id</h1>
             <div class="form-group">
-                <label for="content">Review</label>
+                <label for="content">Please Enter Review Content:</label>
                 <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
             </div>
             <div class="form-check">   
                 <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
                 <label class="form-check-label" for="purchasecheck">
-                    Purchase
+                    Has purchased automobile from this Dealership?(select purchased automobile information below if checked)
                 </label>
             </div>
+            <br>
+            <label class="form-select-label" for="car">
+                <p class="font-weight-bold">Select your car(make-model-year):</p>
+            </label>
+            <select name="car" id="car" class="form-select" required>
+                {% for car in cars %}
+                    <option selected value={{car.id}}>
+                        {{car.make}}-{{car.model}}-{{car.year}}
+                    </option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
             <div class="form-group">
                 <label class="control-label" for="purchasedate">
-                    Purchase Date
+                    <p class="font-weight-bold">Select Your Purchase Date:</p>
                 </label>
                 <input class="date-own form-control" type="text" id="purchasedate" name="purchasedate" placeholder="MM/DD/YYYY">
             </div>
