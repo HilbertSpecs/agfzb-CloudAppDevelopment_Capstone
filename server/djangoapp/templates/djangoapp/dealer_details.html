@@ -24,9 +24,16 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="btn btn-link" href="#">
-                        Add Review
-                    </a>    
+                    {% if not analyzed_reviews.0.dealership %}
+                        <a class="btn btn-link" href="#">
+                            Add 1st Review!
+                        </a>
+                    {% else %}
+                        <a class="btn btn-link" href="{% url 'djangoapp:add_review' analyzed_reviews.0.dealership %}">
+                            Add Review
+                            ({{analyzed_reviews.0.dealership}})
+                        </a>
+                    {% endif %}    
                     <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
                     <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
                 </li>
@@ -55,6 +62,7 @@
     <!-- Add reviews as cards -->
     <div class="jumbotron">
         <h1>Dealer Reviews</h1>
+        Dealership Id: {{analyzed_reviews.0.dealership}}
     </div>
     <div class="container">
     <div class="card-deck">
