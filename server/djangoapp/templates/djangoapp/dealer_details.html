@@ -24,7 +24,7 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="btn btn-link" href="djangoapp/add_review.html">
+                    <a class="btn btn-link" href="#">
                         Add Review
                     </a>    
                     <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
@@ -75,6 +75,9 @@
                     <h5 class="card-title"> {{ analyzed_review.car_make }} {{analyzed_review.car_model}} ({{analyzed_review.car_year}}) </h5>
                     <p class="card-text"> {{ analyzed_review.review }} </p>
                     <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+                </div>
+                <div class="card-footer">
+                   Dealership Id: {{ analyzed_review.dealership }}
                 </div>
         </div>
         {% endfor %}

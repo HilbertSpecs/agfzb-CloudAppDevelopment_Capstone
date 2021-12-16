@@ -46,7 +46,7 @@ def post_request(url, payload, **kwargs):
     print("Kwargs: ",kwargs)
     print("POST to {}".format(url))
     try:
-        response=requests.post(url,params=kwargs,data=payload)
+        response=requests.post(url,params=kwargs,json=payload)
         print(response)
     except:
         print("Post Network Exception Occured")

@@ -145,6 +145,7 @@ def get_dealer_details(request,dealer_id):
         analyzed_reviews=[]
         for review in reviews:
             individual_review={}
+            individual_review["dealership"]=review.dealership
             individual_review["car_make"]=review.car_make
             individual_review["car_model"]=review.car_model
             individual_review["car_year"]=review.car_year
