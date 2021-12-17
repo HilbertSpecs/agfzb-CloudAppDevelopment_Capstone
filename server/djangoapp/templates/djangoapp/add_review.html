@@ -12,7 +12,11 @@
 </head>
     <body>
     <!--Add review form here -->
+    {% if not car_inventory.0.dealer_id %}
+    <form action="{% url 'djangoapp:add_review' dealership %}" method="post">
+    {% else %}
     <form action="{% url 'djangoapp:add_review' car_inventory.0.dealer_id %}" method ="post">
+    {% endif %}
         <div class="container">
             {% csrf_token %}
             <h1>Add Review for Dealership Id</h1>

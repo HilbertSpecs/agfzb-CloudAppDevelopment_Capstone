@@ -134,6 +134,10 @@ def get_dealerships(request):
 # ...
 def get_dealer_details(request,dealer_id):
     context={}
+    #cardealer=CarDealer.objects.filter(id__exact=dealer_id)
+    #print("CarDealer_DEALERID: ",cardealer)
+    #dealername=cardealer.full_name
+    #print("DEALERNAME: ", dealername)
     if request.method == "GET":
         parameters={"dealership":dealer_id}
         url="https://c2ba3bfa.us-south.apigw.appdomain.cloud/api/review"
@@ -184,8 +188,12 @@ def add_review(request,dealer_id):
                 individual_car["style"]=carobject.style
                 individual_car["year"]=carobject.year
                 car_inventory.append(individual_car)
-            context={"car_inventory":car_inventory}
-            print("context: ",context)
+            if len(car_inventory):
+                context={"car_inventory":car_inventory}
+                print("context: ",context)
+            else:
+                context={"dealership":dealer_id}
+                print("context: ",context)
             return render(request,'djangoapp/add_review.html',context)
         #####################################
         elif request.method=='POST':
