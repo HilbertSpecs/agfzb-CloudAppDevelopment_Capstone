@@ -192,9 +192,12 @@ def add_review(request,dealer_id):
             new_review["dealership"]=dealer_id
             new_review["id"]=11
             new_review["name"]="Neddy Speddy"
-            new_review["purchase"]=True
-            new_review["purchase_date"]="12/14/21"
-            new_review["review"]="Dreaming of Speed in my Wake."
+            #new_review["purchase"]=True
+            new_review["purchase"]=request.POST["purchasecheck"]
+            #new_review["purchase_date"]="12/14/21"
+            new_review["purchase_date"]=request.POST["purchasedate"]
+            #new_review["review"]="Dreaming of Speed in my Wake."
+            new_review["review"]=request.POST["content"]
 
             review_payload={}
             review_payload["review"]=new_review
@@ -208,7 +211,8 @@ def add_review(request,dealer_id):
             print("parameters: ",parameters)
             post_response=post_request(review_post_url,review_payload,**parameters)
             print(post_response)
-            return JsonResponse(post_response)
+            #return JsonResponse(post_response)
+            return redirect('djangoapp:dealer_details', dealer_id)
         
         else:
             print("Invalid HTTP Method on Add Review")
