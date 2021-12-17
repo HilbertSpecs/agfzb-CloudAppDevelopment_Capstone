@@ -197,13 +197,16 @@ def add_review(request,dealer_id):
             return render(request,'djangoapp/add_review.html',context)
         #####################################
         elif request.method=='POST':
+            print("request: ", request.body)
             new_review=dict()
-            new_review["car_make"]="Ford"
+            #new_review["car_make"]="Ford"
+            new_review["car_make"]=request.POST["car"]
             new_review["car_model"]="MustangGT"
             new_review["car_year"]=2021
             new_review["dealership"]=dealer_id
             new_review["id"]=11
-            new_review["name"]="Neddy Speddy"
+            #new_review["name"]="Neddy Speddy"
+            new_review["name"]=request.POST["reviewername"]
             #new_review["purchase"]=True
             new_review["purchase"]=request.POST["purchasecheck"]
             #new_review["purchase_date"]="12/14/21"
