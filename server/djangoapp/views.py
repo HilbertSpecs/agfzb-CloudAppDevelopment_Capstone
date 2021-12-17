@@ -198,11 +198,16 @@ def add_review(request,dealer_id):
         #####################################
         elif request.method=='POST':
             print("request: ", request.body)
+            print("CarModel_PrimaryKey: ",CarModel._meta.pk.name)
             new_review=dict()
             #new_review["car_make"]="Ford"
-            new_review["car_make"]=request.POST["car"]
-            new_review["car_model"]="MustangGT"
-            new_review["car_year"]=2021
+            car_received=request.POST["car"]
+            print("CAR_RECIEVED_FORM:",car_received)
+            new_review["car_make"]=car_received.make.name
+            #new_review["car_model"]="MustangGT"
+            new_review["car_model"]=car_received.model_name
+            #new_review["car_year"]=2021
+            new_review["car_year"]=car_received.year.strftime("%Y")
             new_review["dealership"]=dealer_id
             new_review["id"]=11
             #new_review["name"]="Neddy Speddy"

@@ -41,7 +41,7 @@
             <select name="car" id="car" class="form-select" required>
                 {% for car in car_inventory %}
                     <option selected value={{car.id}}>
-                        {{car.make.name}}-{{car.model_name}}-{{car.year|date:"Y"}}
+                       {{car.id}}-{{car.make.name}}-{{car.model_name}}-{{car.year|date:"Y"}}
                     </option>
                 {% endfor %}
             </select>
