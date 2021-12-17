@@ -98,6 +98,7 @@ class DealerReview:
         self.review=review
         #self.sentiment=sentiment
         self.sentiment="default"
+        self.review_time="N/A"
 
     def __str__(self):
         return "Review: " + self.review

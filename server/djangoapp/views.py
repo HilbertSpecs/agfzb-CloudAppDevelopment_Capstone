@@ -11,6 +11,7 @@ from django.contrib import messages
 from datetime import datetime
 import logging
 import json
+from datetime import datetime,timezone
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -155,6 +156,7 @@ def get_dealer_details(request,dealer_id):
             individual_review["car_year"]=review.car_year
             individual_review["review"]=review.review
             individual_review["sentiment"]=review.sentiment
+            individual_review["review_time"]=review.review_time
             analyzed_reviews.append(individual_review)
         if len(analyzed_reviews):
             context={"analyzed_reviews":analyzed_reviews}
@@ -174,6 +176,9 @@ def get_dealer_details(request,dealer_id):
 # def add_review(request, dealer_id):
 # ...
 def add_review(request,dealer_id):
+    review_time=datetime.now(timezone.utc).astimezone().isoformat()
+    review_time=datetime.utcnow().isoformat()
+    print("REVIEW_TIME: ",review_time)
     if request.user.is_authenticated:
         #####################################
         context={}
@@ -219,6 +224,7 @@ def add_review(request,dealer_id):
             new_review["purchase_date"]=request.POST["purchasedate"]
             #new_review["review"]="Dreaming of Speed in my Wake."
             new_review["review"]=request.POST["content"]
+            new_review["review_time"]=datetime.utcnow().isoformat()
 
             review_payload={}
             review_payload["review"]=new_review
