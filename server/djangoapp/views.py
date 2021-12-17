@@ -152,8 +152,12 @@ def get_dealer_details(request,dealer_id):
             individual_review["review"]=review.review
             individual_review["sentiment"]=review.sentiment
             analyzed_reviews.append(individual_review)
-        context={"analyzed_reviews":analyzed_reviews}
-        print("context: ",context)
+        if len(analyzed_reviews):
+            context={"analyzed_reviews":analyzed_reviews}
+            print("context: ",context)
+        else:
+            context={"dealership":dealer_id}
+            print("context",context)
         return render(request,'djangoapp/dealer_details.html',context)
         #for review in reviews:
             #message1=review.review

@@ -25,8 +25,9 @@
                 {% if user.is_authenticated %}
                 <li>
                     {% if not analyzed_reviews.0.dealership %}
-                        <a class="btn btn-link" href="#">
+                        <a class="btn btn-link" href="{% url 'djangoapp:add_review' dealership %}">
                             Add 1st Review!
+                            ({{dealership}})
                         </a>
                     {% else %}
                         <a class="btn btn-link" href="{% url 'djangoapp:add_review' analyzed_reviews.0.dealership %}">
