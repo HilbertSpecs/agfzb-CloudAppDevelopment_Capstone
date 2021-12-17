@@ -182,6 +182,7 @@ def add_review(request,dealer_id):
             car_inventory=[]
             for carobject in carobjects:
                 individual_car={}
+                individual_car["id"]=carobject.id           #Add Primary Key to Context so Can access in POST!
                 individual_car["make"]=carobject.make
                 individual_car["dealer_id"]=carobject.dealer_id
                 individual_car["model_name"]=carobject.model_name
@@ -201,13 +202,13 @@ def add_review(request,dealer_id):
             print("CarModel_PrimaryKey: ",CarModel._meta.pk.name)
             new_review=dict()
             #new_review["car_make"]="Ford"
-            car_received=request.POST["car"]
+            car_received=CarModel.objects.get(id=request.POST["car"])
             print("CAR_RECIEVED_FORM:",car_received)
             new_review["car_make"]=car_received.make.name
             #new_review["car_model"]="MustangGT"
             new_review["car_model"]=car_received.model_name
             #new_review["car_year"]=2021
-            new_review["car_year"]=car_received.year.strftime("%Y")
+            new_review["car_year"]=int(car_received.year.strftime("%Y"))
             new_review["dealership"]=dealer_id
             new_review["id"]=11
             #new_review["name"]="Neddy Speddy"
