@@ -66,9 +66,9 @@
         Dealership Id: {{analyzed_reviews.0.dealership}}
     </div>
     <div class="container">
-    <!--<div class="card-deck">-->
+    <div class="card-deck">
         {% for analyzed_review in analyzed_reviews %}
-        <div class="card bg-light mb-3" style="width: 18rem;">
+        <div class="card bg-light mb-3" style="min-width: 18rem;">
             <div class="card-header">
                 {% if analyzed_review.sentiment == 'positive' %}
                     <img class="img-thumbnail" src="{{MEDIA_URL}}/emoji/positive.png" alt="Card image cap" width="80" heigh="80">
@@ -90,7 +90,7 @@
                 </div>
         </div>
         {% endfor %}
-    <!--</div>-->
+    </div>
     </div>
     </body>
 
