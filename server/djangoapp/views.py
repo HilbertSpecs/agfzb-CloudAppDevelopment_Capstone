@@ -135,7 +135,7 @@ def get_dealerships(request):
 # ...
 def get_dealer_details(request,dealer_id):
     context={}
-    #cardealer=CarDealer.objects.filter(id__exact=dealer_id)
+    #cardealer=CarDealer.objects.get(id__exact=dealer_id)
     #print("CarDealer_DEALERID: ",cardealer)
     #dealername=cardealer.full_name
     #print("DEALERNAME: ", dealername)
