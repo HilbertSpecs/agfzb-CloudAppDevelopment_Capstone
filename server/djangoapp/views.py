@@ -51,10 +51,11 @@ def login_request(request):
         else:
             # If not, return to login page again
             #messages.error(request,'Invalid User Name or Password')
-            return render(request, 'djangoapp/index.html', context)
+            #return render(request, 'djangoapp/index.html', context)
+            return redirect('djangoapp:index')
     else:
-        return render(request, 'djangoapp/index.html', context)
-
+        #return render(request, 'djangoapp/index.html', context)
+        return redirect('djangoapp:index')
 
 # Create a `logout_request` view to handle sign out request
 # def logout_request(request):
