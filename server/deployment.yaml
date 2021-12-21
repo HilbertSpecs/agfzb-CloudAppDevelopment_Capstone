@@ -20,13 +20,11 @@ spec:
         run: dealership
     spec:
       containers:
-      - image: us.icr.io/rabi-oscillate/dealership:latest
+      - image: us.icr.io/sn-labs-evanjames199/dealership:latest
         imagePullPolicy: Always
         name: dealership
         ports:
         - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
-      imagePullSecrets:
-      - name: dealership-secret
   replicas: 1
